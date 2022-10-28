@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div id="form">
+            <h1 id="h1">Quiz</h1>
+            <div id="final">
+                <h2 >dogru   </h2>
+                <h2  id="dogru">   </h2>
+                <h2 > yanlis </h2>
+                <h2  id="yanlis">   </h2>
+            </div>
+            <h2 id="h2">Suallar</h2>
+            <ul id="ul">   </ul>
+            <div id="back">
+                <button id="goback" ><span>&#8592;</span></button>
+                
+                <button id="btn">Basla</button>
+                <button  id="go" ><span>&#8594;</span></button>
+            </div>
+            
+           
+         
+            <div id="questions">
+                <button  id="show">1</button>
+                <button  id="show">2</button>
+                <button  id="show">3</button>
+                <button  id="show">4</button>
+                <button  id="show">5</button>
+            </div>
+           
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+        <script>
+            $("#goback").css("visibility","hidden")
+            $("#go").css("visibility","hidden")
+            $("#questions").css("visibility","hidden")
+            $("#final").css("visibility","hidden")
+            $("#go").click(function(){
+                    console.log(i)
+                
+                if(i==0){
+                    $("#goback").css("visibility","visible")
+                }
+                if(i==3){
+                    $("#go").css("visibility","hidden")
+                    $("#btn").css("visibility","visible")
+                    $("#btn").text("Sumbit")
+                }
+                else{
+                    $("#btn").text("next")
+                }
+                if (i >= 0) record()
+                if(i < test.length  ){
+                    i++
+                    h1.innerHTML = `Sual ${i+1}:`
+                    
+                    h2.innerHTML = test[i].q
+                    let code = ''
+                    test[i].a.forEach(ans => code += `<li><label><input name="a" type="radio">${ans}</label></li>`)
+                    ul.innerHTML = code
+                    if(typeof answers[i] !== 'undefined'){
+                        let ans = ul.querySelectorAll("[name=a]")
+                        ans[answers[i]].checked=true
+                    }
+                 
+
+                }
+            })
+            $("#goback").click(function(){
+      
+                if(i==1){
+                    $("#goback").css("visibility","hidden")
+                }
+                if(i-1==3){
+                    $("#btn").css("visibility","hidden")
+                    $("#go").css("visibility","visible")
+                    $("#btn").text("next")
+                }
+                if (i >= 0) record()
+                if(i < test.length ){
+                    i--
+                    h1.innerHTML = `Sual ${i+1 }:`
+                    
+                    h2.innerHTML = test[i].q
+                    let code = ''
+                    test[i].a.forEach(ans => code += `<li><label><input name="a" type="radio">${ans}</label></li>`)
+                    ul.innerHTML = code
+                    if(typeof answers[i] !== 'undefined'){
+                        let ans = ul.querySelectorAll("[name=a]")
+                        ans[answers[i]].checked=true
+                    }
+                    
+                }
+            })
+            const h1 = document.getElementById("h1")
+            const h2 = document.getElementById("h2")
+            const ul = document.getElementById("ul")
+            const btn = document.getElementById("btn")
+            const ajax = new XMLHttpRequest()
+
+            let quiz, test
+            let i = 0
+            let answers = []
+            
+            ajax.open('GET', 'content/quiz.json')
+            ajax.send()
+            ajax.onload = function(){
+                quiz = JSON.parse(ajax.responseText)
+                h2.innerHTML = quiz.title
+                test = quiz.questions
+            }
+            
+            btn.onclick = function(){
+                
+                
+               if(i==0){
+                $("#go").css("visibility","visible")
+               }
+               
+                next()
+      
+            }
+
+            function next(){
+                $("#btn").css("visibility","hidden")
+                if (i > 0) record()
+                if($("#btn").text()=="Sumbit"){
+                    if (i == 0) record()
+                    count=0;
+                    for (const value of answers) {
+                        if (value == null) {
+                          count++
+                        }
+                      }
+                    
+                    if(answers.length == test.length && count==0) {
+                    result()
+                    
+                    }
+                }
+                else {
+                     if(i>0){
+                       
+                          $("#btn").css("visibility","visible")
+                          $("#btn").text("Sumbit")
+                      }
+                      else{
+                          $("#btn").text("next")
+                      }
+                      if (i == 0) record()
+                      if(i < test.length){
+                          h1.innerHTML = `Sual ${i+1}:`
+                          
+                          h2.innerHTML = test[i].q
+                          let code = ''
+                          test[i].a.forEach(ans => code += `<li><label><input name="a" type="radio">${ans}</label></li>`)
+                          ul.innerHTML = code
+                          
+                      } 
+                }
+
+            }
+
+            function record(){
+                
+               
+                let ans = ul.querySelectorAll("[name=a]")
+                for(let k = 0; k < ans.length; k++){
+                    if(ans[k].checked) answers[i] = k
+                }
+                console.log(answers);
+                 
+               
+            }
+            $("#questions").children().click(function(){
+                i=$(this).text()-1
+                h1.innerHTML = `Sual ${i+1 }:`
+                console.log("beliiiiii")
+                h2.innerHTML = test[i].q
+                $("#ul").css("visibility","visible")
+                $("#ul").empty()
+                
+                
+                for (let index = 0; index < test[i].a.length; index++) {
+                    console.log(index)
+                    console.log(test[i].t)
+                    console.log(answers[i])
+                   
+                    if(index==answers[i]){
+                        if(index==test[i].t){
+                            console.log("444444444444444444444444444444444")
+                             $("#ul").append(`<li  style="background-color:green" ><label><input name="a" type="radio">${test[i].a[index]}</label></li>`)
+                        }
+                        else{
+                            $("#ul").append(`<li  style="background-color:red" ><label><input name="a" type="radio">${test[i].a[index]}</label></li>`)
+                        }
+                       
+                    }
+                    else if(index==test[i].t && index!=answers[i]){
+                        $("#ul").append(`<li  style="background-color:green" ><label><input name="a" type="radio">${test[i].a[index]}</label></li>`)
+                    }
+                    else{
+                        $("#ul").append(`<li   ><label><input name="a" type="radio">${test[i].a[index]}</label></li>`)
+                    }
+                }
+            })
+
+            function result(){
+                h1.innerHTML = quiz.title
+                h2.innerHTML = "Results: "
+                $("#goback").css("visibility","hidden")
+                $("#go").css("visibility","hidden")
+                $("#questions").css("visibility","visible")
+                $("#ul").css("visibility","hidden")
+                $("#final").css("visibility","visible")
+                dogru=0;
+                yanlis=0;
+                for (let index = 0; index < 5; index++) {
+                    if(answers[index]==test[index].t){
+                      $("#questions").children().eq(index).css("background-color","green")
+                      dogru++;
+                    }
+                    else{
+                        yanlis++;
+                        $("#questions").children().eq(index).css("background-color","red")
+                    }
+                  
+                    
+                }
+                console.log(answers.length, answers)
+                btn.remove()
+                $("#dogru").text(dogru)
+                $("#yanlis").text(yanlis)
+                
+            }
+
+        </script>
+    </body>
+</html>

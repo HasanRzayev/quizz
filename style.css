@@ -1,0 +1,51 @@
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    background-image: url("images/aesthetic-colors.gif")  ;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+.back{
+    display: inline-block;
+}
+
+
+
+#form {
+    margin: auto;
+    padding: 2em;
+    box-shadow: 0 0 5px #666;
+    text-align: center;
+    width: 600px;
+    height: 600px;
+    background-color: cornsilk;
+}
+#ul {
+    list-style: none; 
+    text-align: left;
+    padding: 0 0 0 10px;
+}
+#ul li {
+    padding: 5px;
+}
+
+button {
+    width: 70px;
+    height: 70px;
+    
+    
+}
+
+
+
+
+h1{
+   
+}
+h2{
+    display: inline-block;
+}

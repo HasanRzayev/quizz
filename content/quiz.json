@@ -1,0 +1,61 @@
+{
+    "title": "Suallar",
+    "questions":[
+        {
+            "q": "Azərbaycanın ən yüksək zirvəsi hansıdır və hündürlüyü nə qədərdir??",
+            "a":[
+                "4466 ",
+                "4467 ",
+                "4468 ",
+                "4469 ",
+                "4460 "
+            ],
+            "t": 0
+        },
+        {
+            "q": "1-ci Avropa oyunları ölkəmizdə nə zaman keçirilmişdir?",
+            "a":[
+                "2014",
+                "2016",
+                "2018",
+                "2017",
+                "2015"
+            ],
+            "t": 4
+        },
+        {
+            "q": "Milli mətbuatımızın əsası nə zaman qoyulmuşdur?",
+            "a":[
+                "1872",
+                "1873",
+                "1875",
+                "1876",
+                "1877 "
+            ],
+            "t": 2
+        },
+        {
+            "q": "Amerikanin paytaxti haradir?",
+            "a":[
+                "Vaşinqton",
+                "Gedebey",
+                "Kurdemir",
+                "Bileceri",
+                "Salyan"
+            ],
+            "t": 0
+        },
+        {
+            "q": "Çempionlar liqasını 5 dəfə qaldıran klub?",
+            "a":[
+                "Benfika",
+                "Liverpul",
+                "Milan",
+                "M. Yunayted",
+                "Barselona"
+            ],
+            "t": 4
+        }
+       
+    ]
+}
